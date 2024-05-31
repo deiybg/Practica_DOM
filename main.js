@@ -53,9 +53,31 @@ header.appendChild(divBuscar);
 
 
 const ul = document.createElement("ul");
+const iuser = document.createElement("i");
+iuser.classList.add("fas", "fa-user")
 const miCuenta = document.createElement("li");
 miCuenta.textContent = "Mi  cuenta";
+miCuenta.appendChild(iuser);
+const icart = document.createElement("i");
+icart.classList.add("fas", "fa-cart-flatbed");
 const miCesta = document.createElement("li");
 miCesta.textContent = "Mi  cesta";
-ul.append(miCuenta, miCesta);
+miCesta.appendChild(icart)
+ul.append(iuser, miCuenta,icart, miCesta);
 header.appendChild(ul);
+
+
+const h1 = document.createElement("h1");
+const divparrafos = document.createElement("div");
+divparrafos.classList.add("divparrafos");
+h1.textContent = "Especial Monitores";
+const p1 = document.createElement("p");
+p1.textContent = "¿Buscas un nuevo monitor para teletrabajar? ¿Un monitor 4K para ver series con toda la calidad de imagen? ¿Un monitor gaming a tope de frames para jugar sin descanso? Descúbrelos todos en nuestro Especial Monitores a un precio súper rebajado.";
+divparrafos.append(h1,p1);
+
+const imageframe = document.createElement("img");
+imageframe.src= "https://res.cloudinary.com/dhawfyfsv/image/upload/v1717160088/Proyecto%20DOM/frame_gcvvup.jpg";
+imageframe.alt = "Imagen de PCs"
+
+const sectionframe = document.querySelector("#mainframe");
+sectionframe.append(divparrafos,imageframe);

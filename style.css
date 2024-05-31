@@ -27,12 +27,14 @@ header {
   justify-content: space-between;
   text-align: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 0.1px var(--primary-color) solid;
+  position: sticky;
+  z-index: 1;
 }
 
 .imagelogo {
-  width: 50%;
+  width: 40%;
   height: 100%;
 }
 .sectionHeader {
@@ -52,6 +54,10 @@ header {
   text-decoration: none;
 }
 
+.sectionHeader a:hover {
+  background-color: f1f1f1;
+}
+
 .divBuscar {
   width: 50%;
   height: 50%;
@@ -60,18 +66,21 @@ header {
 header input {
   height: 100%;
   width: 100%;
+  padding: 10px;
 }
 
 header ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  height: 100%;
+  gap: 10px;
+  height: 50%;
+
+  width: 20%;
 }
 header li {
   list-style-type: none;
-  padding: 8px;
+  padding: 5px;
 }
 
 header li:hover {
@@ -119,4 +128,35 @@ header li:hover {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+#mainframe {
+  height: 250px;
+  display: flex;
+  background-color: #170453;
+  color: var(--background-color);
+  position: relative;
+}
+
+.divparrafos {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+}
+#mainframe img {
+  width: 40%;
+  object-fit: cover;
+}
+
+#mainframe h1 {
+  font-weight: 800;
+}
+
+.container {
+  display: flex;
+}
+
+.filter {
+  width: 20%;
 }
