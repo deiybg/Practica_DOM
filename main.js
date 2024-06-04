@@ -307,6 +307,7 @@ products.appendChild(ulscreen);
 const searchfilter = document.querySelector("#filter");
 
 const form = document.createElement("form");
+form.classList.add("formclass");
 form.action = "";
 form.method = "post";
 const marca = document.createElement("p");
@@ -329,6 +330,7 @@ marcas.forEach((modelo) => {
 searchfilter.appendChild(form);
 
 const formresolution = document.createElement("form");
+formresolution.classList.add("formresolutionclass");
 formresolution.action = "";
 formresolution.method = "post";
 const Resolución = document.createElement("p");
@@ -348,12 +350,13 @@ resolutions.forEach((resolution) =>{
   const divcheckboxresolution = document.createElement("div");
   divcheckboxresolution.classList.add("divcheckboxresolution");
   divcheckboxresolution.append(checkboxresolution, labelresolution);
-  formresolution.appendChild(divcheckboxresolution)
+  formresolution.appendChild(divcheckboxresolution);
 })
 
 searchfilter.appendChild(formresolution);
 
 const formsupplier = document.createElement("form");
+formsupplier.classList.add("formsupplierclass");
 formsupplier.action = "";
 formsupplier.method = "post";
 const psupplier = document.createElement("p");
@@ -376,3 +379,4 @@ supplier.forEach((suppliers) =>{
 })
 
 searchfilter.appendChild(formsupplier);
+
