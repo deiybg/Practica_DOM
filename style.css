@@ -264,3 +264,45 @@ header li:hover {
   font-weight: 500;
   margin-top: 5px;
 }
+
+@media screen and (max-width: 600px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  header ul {
+    margin-left: 20px;
+  }
+  header ul a {
+    display: none;
+  }
+
+  .dropbtn {
+    display: none;
+  }
+  #filter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 0.1px black solid;
+  }
+
+  #products {
+    width: 100%;
+  }
+
+  .sectionHeader a {
+    display: none;
+  }
+
+  #mainframe {
+    max-width: max-content;
+  }
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

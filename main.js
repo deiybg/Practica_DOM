@@ -314,12 +314,13 @@ const marca = document.createElement("p");
 marca.textContent = "Marca";
 form.appendChild(marca);
 
-const marcas = ["Samsung", "Phillips", "MSI", "AOC", "Acer", "Asus"];
+const marcas = ["Samsung", "Philips", "MSI", "AOC", "Acer", "Asus"];
 marcas.forEach((modelo) => {
   const checkbox = document.createElement("input");
   checkbox.name = "marcas[]";
   checkbox.type = "checkbox";
   checkbox.value = modelo.toLocaleLowerCase();
+  checkbox.addEventListener('change', filterProducts);
   const label = document.createElement("label");
   label.textContent = modelo;
   const divcheckbox = document.createElement("div");
@@ -344,6 +345,7 @@ resolutions.forEach((resolution) =>{
   checkboxresolution.name = "resolutions[]";
   checkboxresolution.type = "checkbox";
   checkboxresolution.value = resolution.toLocaleLowerCase();
+  checkboxresolution.addEventListener('change', filterProducts);
   const labelresolution = document.createElement("label");
   labelresolution.textContent = resolution;
 
@@ -369,6 +371,7 @@ supplier.forEach((suppliers) =>{
   checkboxsupplier.name = "supplier[]";
   checkboxsupplier.type = "checkbox";
   checkboxsupplier.value = suppliers.toLocaleLowerCase();
+  checkboxsupplier.addEventListener('change', filterProducts);
   const labelsupplier = document.createElement("label");
   labelsupplier.textContent = suppliers;
 
@@ -380,3 +383,77 @@ supplier.forEach((suppliers) =>{
 
 searchfilter.appendChild(formsupplier);
 
+function filterProducts() {
+  const selectedBrands = Array.from(document.querySelectorAll("input[name='marcas[]']:checked")).map(cb => cb.value);
+  const selectedResolutions = Array.from(document.querySelectorAll("input[name='resolutions[]']:checked")).map(cb => cb.value);
+  const selectedSuppliers = Array.from(document.querySelectorAll("input[name='supplier[]']:checked")).map(cb => cb.value);
+
+  const filteredScreens = screens.filter(screen => {
+    const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(screen.title.toLowerCase().split(" ")[0]);
+    const matchesResolution = selectedResolutions.length === 0 || selectedResolutions.some(res => screen.title.toLowerCase().includes(res));
+    const matchesSupplier = selectedSuppliers.length === 0 || selectedSuppliers.includes(screen.seller.toLowerCase());
+
+    return matchesBrand && matchesResolution && matchesSupplier;
+  });
+
+  renderProducts(filteredScreens);
+}
+
+// Renderizar productos
+function renderProducts(filteredScreens) {
+  const products = document.querySelector("#products");
+  products.innerHTML = "";
+  const ulscreen = document.createElement("ul");
+
+  for (const screen of filteredScreens) {
+    const imagescreen = document.createElement("a");
+    imagescreen.href = screen.url;
+    const imgscreen = document.createElement("img");
+    imgscreen.src = screen.image;
+    imgscreen.alt = screen.title;
+    imagescreen.appendChild(imgscreen);
+
+    const titleimage = document.createElement("a");
+    titleimage.href = screen.url;
+    titleimage.textContent = screen.title;
+    const pricescreens = document.createElement("h2");
+    pricescreens.textContent = screen.price + " €";
+
+    const starscreens = document.createElement("div");
+    const starCount = screen.star;
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("i");
+      if (i <= starCount) {
+        star.className = "fas fa-star"; // Estrella llena
+      } else if (i === Math.ceil(starCount) && !Number.isInteger(starCount)) {
+        star.className = "fas fa-star-half-alt"; // Media estrella
+      } else {
+        star.className = "far fa-star"; // Estrella vacía
+      }
+      starscreens.appendChild(star);
+    }
+    const sellerscreen = document.createElement("h4");
+    sellerscreen.textContent = "Vendido y enviado por ";
+    const sellerspan = document.createElement("span");
+    sellerspan.textContent = screen.seller;
+    sellerspan.classList.add("classspan");
+    sellerscreen.appendChild(sellerspan);
+    const deliveryscreen = document.createElement("p");
+    deliveryscreen.textContent = screen.delivery;
+    const liscreen = document.createElement("li");
+    liscreen.append(
+      imagescreen,
+      titleimage,
+      pricescreens,
+      starscreens,
+      sellerscreen,
+      deliveryscreen
+    );
+    ulscreen.appendChild(liscreen);
+  }
+
+  products.appendChild(ulscreen);
+}
+
+// Inicializar con todos los productos
+renderProducts(screens);
