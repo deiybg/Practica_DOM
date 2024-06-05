@@ -320,7 +320,7 @@ marcas.forEach((modelo) => {
   checkbox.name = "marcas[]";
   checkbox.type = "checkbox";
   checkbox.value = modelo.toLocaleLowerCase();
-  checkbox.addEventListener('change', filterProducts);
+  checkbox.addEventListener("change", filterProducts);
   const label = document.createElement("label");
   label.textContent = modelo;
   const divcheckbox = document.createElement("div");
@@ -338,14 +338,13 @@ const Resolución = document.createElement("p");
 Resolución.textContent = "Tipos de pantalla";
 formresolution.appendChild(Resolución);
 
-
-const resolutions =["FullHd","QHD","UltraHD","UltraHD 4K"];
-resolutions.forEach((resolution) =>{
+const resolutions = ["FullHd", "QHD", "UltraHD", "UltraHD 4K"];
+resolutions.forEach((resolution) => {
   const checkboxresolution = document.createElement("input");
   checkboxresolution.name = "resolutions[]";
   checkboxresolution.type = "checkbox";
   checkboxresolution.value = resolution.toLocaleLowerCase();
-  checkboxresolution.addEventListener('change', filterProducts);
+  checkboxresolution.addEventListener("change", filterProducts);
   const labelresolution = document.createElement("label");
   labelresolution.textContent = resolution;
 
@@ -353,7 +352,7 @@ resolutions.forEach((resolution) =>{
   divcheckboxresolution.classList.add("divcheckboxresolution");
   divcheckboxresolution.append(checkboxresolution, labelresolution);
   formresolution.appendChild(divcheckboxresolution);
-})
+});
 
 searchfilter.appendChild(formresolution);
 
@@ -365,13 +364,13 @@ const psupplier = document.createElement("p");
 psupplier.textContent = "Vendedor";
 formsupplier.appendChild(psupplier);
 
-const supplier =["PC componentes","ART","Infopavon"];
-supplier.forEach((suppliers) =>{
+const supplier = ["PC componentes", "ART", "Infopavon"];
+supplier.forEach((suppliers) => {
   const checkboxsupplier = document.createElement("input");
   checkboxsupplier.name = "supplier[]";
   checkboxsupplier.type = "checkbox";
   checkboxsupplier.value = suppliers.toLocaleLowerCase();
-  checkboxsupplier.addEventListener('change', filterProducts);
+  checkboxsupplier.addEventListener("change", filterProducts);
   const labelsupplier = document.createElement("label");
   labelsupplier.textContent = suppliers;
 
@@ -379,19 +378,33 @@ supplier.forEach((suppliers) =>{
   divcheckboxsupplier.classList.add("divcheckboxsupplier");
   divcheckboxsupplier.append(checkboxsupplier, labelsupplier);
   formsupplier.appendChild(divcheckboxsupplier);
-})
+});
 
 searchfilter.appendChild(formsupplier);
 
 function filterProducts() {
-  const selectedBrands = Array.from(document.querySelectorAll("input[name='marcas[]']:checked")).map(cb => cb.value);
-  const selectedResolutions = Array.from(document.querySelectorAll("input[name='resolutions[]']:checked")).map(cb => cb.value);
-  const selectedSuppliers = Array.from(document.querySelectorAll("input[name='supplier[]']:checked")).map(cb => cb.value);
+  const selectedBrands = Array.from(
+    document.querySelectorAll("input[name='marcas[]']:checked")
+  ).map((cb) => cb.value);
+  const selectedResolutions = Array.from(
+    document.querySelectorAll("input[name='resolutions[]']:checked")
+  ).map((cb) => cb.value);
+  const selectedSuppliers = Array.from(
+    document.querySelectorAll("input[name='supplier[]']:checked")
+  ).map((cb) => cb.value);
 
-  const filteredScreens = screens.filter(screen => {
-    const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(screen.title.toLowerCase().split(" ")[0]);
-    const matchesResolution = selectedResolutions.length === 0 || selectedResolutions.some(res => screen.title.toLowerCase().includes(res));
-    const matchesSupplier = selectedSuppliers.length === 0 || selectedSuppliers.includes(screen.seller.toLowerCase());
+  const filteredScreens = screens.filter((screen) => {
+    const matchesBrand =
+      selectedBrands.length === 0 ||
+      selectedBrands.includes(screen.title.toLowerCase().split(" ")[0]);
+    const matchesResolution =
+      selectedResolutions.length === 0 ||
+      selectedResolutions.some((res) =>
+        screen.title.toLowerCase().includes(res)
+      );
+    const matchesSupplier =
+      selectedSuppliers.length === 0 ||
+      selectedSuppliers.includes(screen.seller.toLowerCase());
 
     return matchesBrand && matchesResolution && matchesSupplier;
   });
